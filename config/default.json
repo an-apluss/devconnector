@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://anapluss:12345@cluster0-bmtdw.mongodb.net/devconnector?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://anapluss:12345@cluster0-bmtdw.mongodb.net/devconnector?retryWrites=true&w=majority",
+  "jwtPrivateKey": "JWT_SECRET"
 }
