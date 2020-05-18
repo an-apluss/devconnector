@@ -77,9 +77,9 @@ router.post(
         }
       );
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
       res.status(500).json({
-        message: "Server Error: User cannot be created",
+        msg: "Server Error: User cannot be created",
       });
     }
   }
