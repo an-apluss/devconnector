@@ -43,17 +43,21 @@ router.post(
       const user = await User.findOne({ email });
 
       if (!user) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "Authentication Failed: Invalid credential provided" }] });
+        return res.status(400).json({
+          errors: [
+            { msg: "Authentication Failed: Invalid credential provided" },
+          ],
+        });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "Authentication Failed: Invalid credential provided" }] });
+        return res.status(400).json({
+          errors: [
+            { msg: "Authentication Failed: Invalid credential provided" },
+          ],
+        });
       }
 
       const payload = {
