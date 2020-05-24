@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://anapluss:12345@cluster0-bmtdw.mongodb.net/devconnector?retryWrites=true&w=majority",
-  "jwtPrivateKey": "JWT_SECRET"
+  "jwtPrivateKey": "JWT_SECRET",
+  "githubClientID": "256e0f62dfa5ebb93cdc",
+  "githubClientSecret": "1cb250df287a48630d3410fb348e6a57808efe35"
 }
