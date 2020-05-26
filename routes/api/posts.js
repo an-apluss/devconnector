@@ -145,4 +145,40 @@ router.put("/unlike/:id", auth, async (req, res) => {
   }
 });
 
+router.post(
+  "/comment/:id",
+  [auth, [check("text", "Text is required").not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(200).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select("-password");
+      const post = await Post.findById(req.params.id);
+
+      const newComment = {
+        user: req.user.id,
+        text: req.body.text,
+        name: user.name,
+        avatar: user.avatar,
+      };
+
+      post.comment.unshift(newComment);
+      await post.save();
+
+      return res.status(200).json(post.comments);
+    } catch (error) {
+      console.error(error);
+
+      if (error.kind == "ObjectId")
+        return res.status(404).json({ msg: "Post not found" });
+
+      res.status(500).json({ msg: error.message });
+    }
+  }
+);
+
 module.exports = router;
