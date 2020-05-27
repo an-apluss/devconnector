@@ -166,7 +166,7 @@ router.post(
         avatar: user.avatar,
       };
 
-      post.comment.unshift(newComment);
+      post.comments.unshift(newComment);
       await post.save();
 
       return res.status(200).json(post.comments);

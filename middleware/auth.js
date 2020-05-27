@@ -20,7 +20,7 @@ module.exports = function (req, res, next) {
   } catch (error) {
     console.error(error.message);
 
-    if (error.kind == "jwt expired") {
+    if (error.kind == "jwt expired" || error.message == "jwt expired") {
       return res.status(400).json({ msg: "JWT Expired: Login to proceed" });
     }
 
