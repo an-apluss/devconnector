@@ -181,4 +181,44 @@ router.post(
   }
 );
 
+router.delete("/comment/:post_id/:comment_id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.post_id);
+
+    const comment = post.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+
+    if (!comment) {
+      return res.status(404).json({ msg: "Comment does not exist" });
+    }
+
+    if (comment.user.toString() !== req.user.id) {
+      return res
+        .status(401)
+        .json({ msg: "Unauthorized: You cannot delete this comment" });
+    }
+
+    const removeIndex = post.comments
+      .map((comment) => comment.user.toString())
+      .indexOf(req.user.id);
+
+    if (removeIndex < 0) {
+      return res.status(404).json({ msg: "Comment does not exist" });
+    }
+
+    post.comments.splice(removeIndex, 1);
+    await post.save();
+
+    return res.status(200).json(post.comments);
+  } catch (error) {
+    console.error(error);
+
+    if (error.kind == "ObjectId")
+      return res.status(404).json({ msg: "Post not found" });
+
+    res.status(500).json({ msg: error.message });
+  }
+});
+
 module.exports = router;
