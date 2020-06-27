@@ -21,7 +21,7 @@ module.exports = function (req, res, next) {
     console.error(error.message);
 
     if (error.kind == "jwt expired" || error.message == "jwt expired") {
-      return res.status(400).json({ msg: "Token Expired: Login to proceed" });
+      return res.status(401).json({ msg: "Token Expired: Login to proceed" });
     }
 
     return res.status(401).json({ msg: "Token is invalid" });

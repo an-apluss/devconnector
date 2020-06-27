@@ -39,6 +39,7 @@ router.post(
     ],
   ],
   async (req, res) => {
+    console.log(req.body.skills)
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
