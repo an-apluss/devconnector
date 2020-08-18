@@ -9,7 +9,7 @@ connectDB();
 
 app.use(express.json({ extended: true }));
 
-const whitelist = ["http://localhost:3000"];
+const whitelist = ["http://localhost:3000", "https://connectdev.netlify.app"];
 
 const corsOptions = {
   origin: function (origin, callback) {
