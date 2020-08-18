@@ -1,6 +1,6 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
-const config = require("config");
+require("dotenv/config");
 const request = require("request");
 
 const auth = require("../../middleware/auth");
@@ -306,9 +306,9 @@ router.get("/github/:username", async (req, res) => {
     const options = {
       uri: `https://api.github.com/users/${
         req.params.username
-      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
-        "githubClientID"
-      )}/client_secret=${config.get("githubClientSecret")}`,
+      }/repos?per_page=5&sort=created:asc&client_id=${
+        process.env.githubClientID
+      }/client_secret=${process.env.githubClientSecret}`,
       method: "GET",
       headers: { "user-agent": "node.js" },
     };
