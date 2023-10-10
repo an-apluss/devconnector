@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server",
-    "heroku-postbuild": "echo skip post-build"
+    "dev": "nodemon server"
   },
   "keywords": [
     "social",
